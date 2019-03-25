@@ -1,4 +1,5 @@
 var api = 'http://zirtysperzys.info:18180';
+var apiList = [];
 var blockTargetInterval = 81;
 var coinUnits = 10000000;
 var symbol = 'DRGL';
@@ -9,4 +10,3 @@ var networkStat = {
 	["crypto9coin.cf", "https://crypto9coin.cf:18183"]
     ]
 };
-
