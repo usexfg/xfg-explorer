@@ -85,7 +85,7 @@ table a:not(.btn), .table a:not(.btn) {
 		
 		table td {
 			font-family: 'Questrial', sans-serif; 'arial', sans-serif;
-			font-size: 13px;
+			font-size: medium;
 			font-variant: all-small-caps;
 			color: dodgerblue;
 	}
