@@ -66,6 +66,8 @@
 
     var currentPage;
     var lastStats;
+    var nodeStatus;
+
 
     function getReadableHashRateString(hashrate){
         var i = 0;
@@ -130,10 +132,12 @@
             dataType: 'json',
             type: 'GET',
             cache: 'false'
-        }).done(function(data){
+        }).done(function(data, success){
             pulseLiveUpdate();
             lastStats = data;
+            nodeStatus = success;
             currentPage.update();
+	    nodeInfo();
         }).always(function () {
             setTimeout(function() {
                 fetchLiveStats();
@@ -145,6 +149,25 @@
         return float.toFixed(6).replace(/[0\.]+$/, '');
     }
 
+    function nodeInfo() {
+        if(nodeStatus) {
+			$('#node_connection').html('Online').addClass('text-success').removeClass('text-danger');
+			$('#node_height').html(parseInt(lastStats['height']));
+			$('#node_block').html(parseInt(lastStats['last_known_block_index']));
+			$('#node_diff').html(parseInt(lastStats['difficulty']));
+			$('#node_alt').html(parseInt(lastStats['alt_blocks_count']));
+			$('#node_inc').html(parseInt(lastStats['incoming_connections_count']));
+			$('#node_out').html(parseInt(lastStats['outgoing_connections_count']));
+			$('#node_white').html(parseInt(lastStats['white_peerlist_size']));
+			$('#node_grey').html(parseInt(lastStats['grey_peerlist_size']));
+			if (lastStats['version'] !== 'undefined'){
+				$('#node_ver').html(lastStats['version']);
+			}
+		} else {
+			$('#node_connection').html('Offline').addClass('text-danger').removeClass('text-success');
+		}
+    }
+	
     var xhrPageLoading;
     function routePage(loadedCallback) {
 
@@ -440,24 +463,41 @@
                     <small><font face="Caudex">© 2018 <strong>DRÆGONGLASS</strong></font>
                     </small>
                 </p>
-            </div><div class="col-lg-12 col-md-12 col-sm-12">
-    
-                
-
+            </div>
+		
+		
             <div class="col-lg-4 col-md-4 col-sm-6" style="padding-bottom: 0.1%;color: #0f00ff;margin-top: 2%;" type="disc" align="left">
-  <div class="drglinks"style="color:silver;">
-            <li><a href="https://www.zirtysperzys.org">ZirtysPerzys.org</a></li><li><a href="https://crypto9coin.cf/drgl/">Crypto9coin - DRGL</a></li><li><a href="https://mine.DRGL.online">mine.DRGL.online</a></li><li><a href="https://drgl.cool-pool.net">Cool-Pool - DRGL</a></li></div>
-</div><div class="col-lg-4 col-md-4 col-sm-6" style="margin-top: 2%;"><p align="center">
+  
+	<div class="drglinks"style="color:silver;">
+        
+		<li><a href="https://www.zirtysperzys.org">ZirtysPerzys.org</a></li><li><a href="https://crypto9coin.cf/drgl/">Crypto9coin - DRGL</a></li><li><a href="https://mine.DRGL.online">mine.DRGL.online</a></li><li><a href="https://drgl.cool-pool.net">Cool-Pool - DRGL</a></li>
+    </div>
+           </div>
+			<div class="col-lg-4 col-md-4 col-sm-6" style="margin-top: 2%;"><p align="center">
                     <small>
                         <!-- This copyright should be left intact -->
                         <font size="2px" color="#C0C0C0">Powered by  <a target="_blank" href="https://github.com/ZirtysPerzys/DRGL"><font color="#0078ff"><i class="fa fa-github"></i>  {{{{ DRGL }}}}</font></a>
                        <br>
                         <span class=""><font size="1px">Based on cryptonote-universal-pool</font></span> <br>
-<span><a href="https://github.com/Karbovanets/Karbowanec-Blockchain-Explorer"><font size="1px" color="#ffec00">Karbo</font><font size="1px" color="#1bb1fa">-Blockchain-Explorer</font></a> || <a target="_blank" href="https://github.com/close0ne/turtle.land"><font size="1px" color="#2ecc71">Turtle.Land</font></a></span> <br>
+<span><a href="https://github.com/Karbovanets/Karbowanec-Blockchain-Explorer"><font size="1px" color="#ffec00">Karbo</font><font size="1px" color="#1bb1fa">-Blockchain-Explorer</font></a></span> <br>
                   <span><font size="1px">Open sourced under the </font><a href="http://www.gnu.org/licenses/gpl-2.0.html"><font size="1px" color="white">GPL</font></a></span>
                  </font></small>
                 </p>
               </div>
+		<div class="col-lg-4 col-md-4 col-sm-6">
+			<strong class="text-info">Node info</strong>
+				<ul class="text-info">
+					<li>Status: <span id="node_connection" class="text-danger">Offline</span></li>
+					<li>Version: <span id="node_ver">...</span></li>
+					<li>Height: <span id="node_height">...</span></li>
+					<li>Last block: <span id="node_block">...</span></li>
+					<li>Difficulty: <span id="node_diff">...</span></li>
+					<li>Alt. blocks: <span id="node_alt">...</span></li>
+					<li>Incoming connections: <span id="node_inc">...</span></li>
+					<li>Outgoing connects: <span id="node_out">...</span></li>
+					<li>White peers: <span id="node_white">...</span></li>
+					<li>Grey peers: <span id="node_grey">...</span></li>
+				</ul>
             </div>
         </div>
     </div>
