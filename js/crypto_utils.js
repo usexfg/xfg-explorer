@@ -1628,7 +1628,7 @@ var config = {
     coinSymbol: 'XFG',
     coinName: 'Fandom GOLD',
     coinUriPrefix: 'fandomgold:',
-    addressPrefix: 679385
+    addressPrefix: 27188
 };
 var cnUtil = (function(initConfig) {
     //var config = $.extend({}, initConfig);
