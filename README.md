@@ -1,4 +1,4 @@
-https://media.giphy.com/media/1lyNpxI9jYok4LjAai/giphy.gif
+<img src=https://media.giphy.com/media/1lyNpxI9jYok4LjAai/giphy.gif> </img>
 
 # XFG ChainXplorer
 Block Explorer for Fandom GOLD cryptocurrency
