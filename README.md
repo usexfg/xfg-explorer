@@ -1,6 +1,6 @@
 <img src=https://media.giphy.com/media/1lyNpxI9jYok4LjAai/giphy.gif> </img>
 
-# XFG ChainXplorer
+# Fandom GOLD Chain Explorer
 Block Explorer for Fandom GOLD cryptocurrency
 
 Runs on data from your fandomgold dæmon node. Should be ready to go for use on web servers (AWS, Digital Ocean)
