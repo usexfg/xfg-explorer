@@ -11,3 +11,4 @@ $difficulty = $obj['difficulty'];
 $hashrate = round($difficulty / 480);
 print_r($hashrate);
 ?>
+
