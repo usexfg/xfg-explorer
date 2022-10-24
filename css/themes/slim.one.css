@@ -14,8 +14,8 @@ body {
   color: #1b84e7; }
 
 .slim-logo span {
-  color: #868ba1; 
-  text-shadow: 1px 2px aliceblue;}
+   color: rgba(51, 245, 255, 0.9);
+   text-shadow: 2px -2px #ff00fe;    }
 
 .search-box .btn {
   background-color: #1b84e7;
@@ -78,22 +78,28 @@ body {
  border-left: 0px;
  border-right: 0px;*/
  }
-  .slim-navbar .nav-link {
-    background-color: #212529;
-    border-color: #343a40;
-    color: #e8e8e8 !important; }
-    .slim-navbar .nav-link:hover, .slim-navbar .nav-link:focus {
-      background-color: #262a2f;
+.slim-navbar .nav-link {
+background-color: #400022;
+border-color: #343a40;
+color: #e8e8e8 !important;
+background-repeat:round;
+background-image: url(/css/themes/gradi.gif);
+border-width: 1px;
+border-radius: 21px;
+background-blend-mode: color-dodge;
+}
+  .slim-navbar .nav-link:hover, .slim-navbar .nav-link:focus {
+      background-color: #020202;
       color: #fff; }
   .slim-navbar .nav-item.active .nav-link {
-    background-color: #262a2f;
+    background-color: #181818;
     background-image: none;
-    color: #1b84e7;
+    color: #b17aff !important;
     border-width: 1px; }
     .slim-navbar .nav-item.active .nav-link .icon {
-      color: #1b84e7; }
+      color: #00c4ff; }
   .slim-navbar .sub-item {
-    background-color: #1a1d21;
+    background-color: #181818;
     border-width: 0;
     box-shadow: none; }
     .slim-navbar .sub-item ul a {
@@ -105,7 +111,7 @@ body {
       background-color: #1a1d21;
       border-width: 0; }
   .slim-navbar .mega-dropdown .sub-item .section-label {
-    border-color: #2f353a;
+    border-color: #181818;
     color: #fff; }
   .slim-navbar .mega-dropdown .sub-item a {
     padding-left: 0;
@@ -115,7 +121,7 @@ body {
       background-color: transparent; }
 
 .search-box {
-  background-color: #212529;
+  background-color: #000000;
   border-color: #343a40; }
   .search-box .form-control {
     color: #fff; }
@@ -168,7 +174,7 @@ body {
   color: #868ba1; }
 
 hr {
-  border-color: #343a40; }
+  border-color: #000; }
 
 .img-thumbnail {
   border-color: #343a40;
@@ -208,11 +214,11 @@ hr {
 .card-dash-one {
   border-color: #343a40; }
   .card-dash-one .row > div:nth-child(odd) {
-    background-color: #212529; }
+    background-color: black; }
   .card-dash-one .row > div:nth-child(even) {
-    background-color: #262a2f; }
+    background-color: black; }
   .card-dash-one .row > div + div {
-    border-color: #343a40; }
+    border-color: gold; }
   .card-dash-one .dash-content h2 {
     color: #fff;
     font-weight: 400; }
@@ -249,7 +255,7 @@ hr {
   border-color: #343a40; }
 
 .nav-statistics-wrapper {
-  border-color: #343a40; }
+  border-color: #000; }
   .nav-statistics-wrapper .nav-link.active {
     color: #1b84e7; }
   .nav-statistics-wrapper .nav:first-child .nav-link::before {
@@ -319,8 +325,8 @@ hr {
 
 /******************** CARD ********************/
 .card:not([class*=" bg-"]) {
-  background-color: #212529;
-  border-color: #343a40; }
+  background-color: #121212;
+  border-color: #000; }
 
 .card-header,
 .card-footer {

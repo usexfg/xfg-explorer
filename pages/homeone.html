@@ -72,22 +72,23 @@
 </div>
 
 
-<div style="background-color:#090046;"class="panel panel-default">
-<input type="button" class="btn btn-default btn-xs pull-right" value="☰" onclick="tra()" style="border-radius: 0px;font-size:8px;">
+<div style="background-color:transparent;"class="panel panel-default">
+<input type="button" class="btn btn-default btn-xs pull-right" value="☰" onclick="tra()" style="border-radius: 8px;font-size:8px;">
   <div class="panel-heading"> 
 	<h3 style=""class="panel-title"><i class="fa fa-exchange fa-fw" aria-hidden="true"></i> Transaction pool 
+<span id="mempool_count" class="badge"></span>
 	<span class="text-default" data-toggle="tooltip" data-placement="right" data-original-title="Recent transactions waiting to be included into a block. Once it happens a transaction gets into the blockchain and becomes confirmed."><i class="fa fa-question-circle"></i></span>
     </h3>
 	
   </div>
 		
 		<div class="row"style="box-shadow: 0px -45px 2000px 21px #29d7ff;margin-bottom: 33px;border-radius: 21px;background-color:#090046;color:#11baff;">
-		  <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"style="margin-left: 45px;">
+<!---		  <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"style="margin-left: 45px;">
 			<div class="panel panel-default tab-panel"style="margin-bottom: 0px;border-radius: 45px;">
 			  <div class="panel-body">
 				
 				  <ul class="nav nav-pills nav-stacked">
-					<li data-toggle="tooltip" data-placement="bottom" data-original-title="">Count: <span id="mempool_count"></span></li>
+				<li data-toggle="tooltip" data-placement="bottom" data-original-title="">Count: <span id="mempool_count"></span></li> 
 				  </ul>
 				
 			  </div>
@@ -125,14 +126,14 @@
 			   
 		      </div>
 			</div>
-		  </div>
+		  </div> --->
   <div id="tradiv" class="panel-body"style="display:none;width:90%;">
 
 		<div style="font-family:Lato;width:111%;" class="table-responsive">
 			<table class="table table-hover" id="mem_pool_table">
 				<thead>
 				<tr>
-					<th style="background-color: #b6e4ec33;border-top-left-radius: 42px;" width="30%"><i class="fa fa-clock-o"></i> Date &amp; time</th>
+				<!--	<th style="background-color: #b6e4ec33;border-top-left-radius: 42px;" width="30%"><i class="fa fa-clock-o"></i> Date &amp; time</th> --->
 					<th style="background-color: #b6e4ec33;" width="10%"><i class="fa fa-money"></i> Amount</th>
 					<th style="background-color: #b6e4ec33;" width="10%"><i class="fa fa-tag"></i> Fee</th>
 					<th style="background-color: #b6e4ec33;" width="10%"><i class="fa fa-archive"></i> Size</th>
@@ -150,8 +151,8 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-<div class="row" style="background-color: dimgray;border-radius: 16px;border: 1px solid black;margin-top: 20px;">
-<h4 class="panel-title" style="padding-right: 95px;margin-left: 20px;margin-top: 7px;color:black;"><i class="fa fa-chain fa-rotate-270 fa-fw" aria-hidden="true"></i> Recent blocks</h4>
+<div class="row" style="background-color: black;border-radius: 16px;border: 1px solid black;margin-top: 20px;">
+<h4 class="panel-title" style="padding-right: 95px;margin-left: 20px;margin-top: 7px;color:goldenrod;"><i class="fa fa-chain fa-rotate-270 fa-fw" aria-hidden="true"></i> Recent blocks</h4>
 		<div class="col-sm-8 col-md-6 col-lg-5">
 			<div class="input-group">
 				<a id="prev-page" href="#" class="btn btn-default input-group-addon"><i class="fa fa-arrow-left" aria-hidden="true"></i> Older</a>
@@ -516,62 +517,112 @@ $('#goto-height').keyup(function(e){
 		updateText('avgSolveTime', getReadableTime(avg_solve_time));
 	}
 
-// {XFG} MemPool Transactions
-function getPoolTransactions(){
-  var xhrGetPool = $.ajax({
-	url: api + '/json_rpc',
-	method: "POST",
-	data: JSON.stringify({
-		jsonrpc: "2.0",
-		id: "test",
-		method: "f_mempool_json",
-		params: {}
-	}),
-	dataType: 'json',
-	cache: 'false',
-	success: function(newdata) {
-		if(typeof newdata.result !== "undefined") {
-			var data = newdata.result.mempool;
-			var totalAmount = 0;
-			var totalFee = 0;
-			var totalSize = 0;
-			var txcount = 0;
-			var txsRows = document.getElementById('mem_pool_rows');
-			  if (txsRows) {
-				while (txsRows.firstChild) {
-				  txsRows.removeChild(txsRows.firstChild);
-				}
-			  }
-			for (var i = 0; i < data.length; i ++){
-				var tx = data[i];
-					
-				var row = document.createElement('tr');
-				var columns =
-					'<td>' + formatDate(tx.receiveTime) + ' (<span class="mtx-ago"></span>)' + '</td>' +
-					'<td>' + getReadableCoins(tx.amount_out, 4, true) + '</td>' +
-					'<td>' + getReadableCoins(tx.fee, 4, true) + '</td>' +
-					'<td>' + formatBytes(parseInt(tx.size)) + '</td>' +
-					'<td>' + formatPaymentLink(tx.hash) + '</td>';
-				row.innerHTML = columns;
-				$(txsRows).append(row);
-				$(row).find('.mtx-ago').timeago('update', new Date(tx.receiveTime * 1000).toISOString());
-				
-				txcount = txcount + 1;
-				totalAmount = tx.amount_out + totalAmount;
-				totalFee = totalFee + tx.fee;
-				totalSize = totalSize + tx.size;
-				
-			}
-			updateText('mempool_count', txcount);
-			updateText('mempool_amount', getReadableCoins(totalAmount,4));
-			updateText('mempool_fees', getReadableCoins(totalFee, 7));
-			updateText('mempool_sizes', formatBytes(parseInt(totalSize)));
-				
-		}
 
-	}
-  });
-}
+    function getPoolTransactions() {
+        var xhrGetPool = $.ajax({
+            url: api + '/json_rpc',
+            method: "POST",
+            data: JSON.stringify({
+                jsonrpc:"2.0",
+                id: "test",
+                method:"f_on_transactions_pool_json",
+                params: {}
+            }),
+            dataType: 'text',
+            cache: 'false',
+            success: function(data) {
+                var txsRows = document.getElementById('mem_pool_rows');
+                while (txsRows.firstChild) {
+                    txsRows.removeChild(txsRows.firstChild);
+                }
+
+                var rawTxs = data.split('"transactions":').pop();
+                rawTxs = rawTxs.split('}}')[0];
+                var transactions = JSON.parse(rawTxs);
+                var txsArray = [];
+                txsArray = rawTxs.split('\n\n');
+                for(var tx in transactions) {
+                    var hash = transactions[tx].hash;
+                    if(hash != "") {
+                        var amount = transactions[tx].amount_out;
+                        var fee = transactions[tx].fee;
+                        var size = transactions[tx].size;
+                        var row = document.createElement('tr');
+                        var timestamp = Date().now; // this is not yet part of the json that gets returned in f_transactions_pool_json, leave for now
+                        var columns =
+                        /*    '<td>' + formatDate(timestamp) + ' (<span class="mtx-ago"></span>)' + '</td>' + */
+                            '<td>' + getReadableCoins(amount, 4, true) + '</td>' +
+                            '<td>' + getReadableCoins(fee, 4, true) + '</td>' +
+                            '<td>' + localizeNumber(size) + '</td>' +
+                            '<td>' + formatPaymentLink(hash) + '</td>';
+                        row.innerHTML = columns;
+                        $(txsRows).append(row);
+                    //    $(row).find('.mtx-ago').timeago('update', new Date(timestamp * 1000).toISOString());  We can re-enable this after a timestamp is added to the mem_pool json
+                    }
+                }
+                updateText('mempool_count', document.querySelectorAll('#mem_pool_rows tr').length);
+            },
+            error: function(data) { }
+        });
+    };
+
+// {XFG} MemPool Transactions
+// function getPoolTransactions(){
+//  var xhrGetPool = $.ajax({
+//	url: api + '/json_rpc',
+//	method: "POST",
+//	data: JSON.stringify({
+//		jsonrpc: "2.0",
+//		id: "test",
+//		method: "f_mempool_json",
+//		params: {}
+//	}),
+//	dataType: 'json',
+//	cache: 'false',
+//	success: function(newdata) {
+//		if(typeof newdata.result !== "undefined") {
+//			var data = newdata.result.mempool;
+//			var totalAmount = 0;
+//			var totalFee = 0;
+//			var totalSize = 0;
+//			var txcount = 0;
+//			var txsRows = document.getElementById('mem_pool_rows');
+//			  if (txsRows) {
+//				while (txsRows.firstChild) {
+//				  txsRows.removeChild(txsRows.firstChild);
+//				}
+//			  }
+//			for (var i = 0; i < data.length; i ++){
+//				var tx = data[i];
+//					
+//				var row = document.createElement('tr');
+//				var columns =
+//					'<td>' + formatDate(tx.receiveTime) + ' (<span class="mtx-ago"></span>)' + '</td>' +
+//					'<td>' + getReadableCoins(tx.amount_out, 4, true) + '</td>' +
+//					'<td>' + getReadableCoins(tx.fee, 4, true) + '</td>' +
+//					'<td>' + formatBytes(parseInt(tx.size)) + '</td>' +
+//					'<td>' + formatPaymentLink(tx.hash) + '</td>';
+//				row.innerHTML = columns;
+//				$(txsRows).append(row);
+//				$(row).find('.mtx-ago').timeago('update', new Date(tx.receiveTime * 1000).toISOString());
+//				
+//				txcount = txcount + 1;
+//				totalAmount = tx.amount_out + totalAmount;
+//				totalFee = totalFee + tx.fee;
+//				totalSize = totalSize + tx.size;
+//				
+//			}
+//			updateText('mempool_count', txcount);
+//			updateText('mempool_amount', getReadableCoins(totalAmount,4));
+//			updateText('mempool_fees', getReadableCoins(totalFee, 7));
+//			updateText('mempool_sizes', formatBytes(parseInt(totalSize)));
+//				
+//		}
+//
+//	}
+//  });
+// } 
+
 // Difficulty chart
 function displayDiffChart() {
 	var ctx = document.getElementById("difficultyChart").getContext("2d"); 

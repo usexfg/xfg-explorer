@@ -14,32 +14,32 @@
           <div class="dash-content">
             <label class="tx-primary" tkey="totalBanked">Total Banked</label>
             <label class="tx-primary" id="depositCoinsPct"></label><BR>
-            <label class="tx-secondary" tkey="totalBankedInfo">Total funds locked in deposits (coming soon)</label>
+            <label href="http://testnet.fango.money" class="tx-secondary">Ledger Deposits are LIVE</label>
             <h2><span id="depositCoins">N/A</span></h2>
           </div><!-- dash-content -->
         </div><!-- col-4 -->
         <div class="col-lg-4">
           <div class="dash-content dash-small-info">
-            <label class="tx-primary" tkey="circulatingSuppy">Circulating Supply</label>
-            <label class="tx-primary" id="emissionPercentPct""></label><BR>
+            <label class="tx-primary" tkey="circulatingSupply">Circulating Supply</label>
+            <label class="tx-primary" id="emissionPercentPct"></label><BR>
             <label class=" tx-secondary" tkey="circulatingSuppyInfo">The total number of coins not banked.</label>
-            <h2><span id="emissionPercent">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-        <div class="col-lg-4">
-          <div class="dash-content dash-small-info">
-            <label class="tx-primary" tkey="totalSupply">Total Supply</label>
-            <label class="tx-primary" id="totalCoinsPct">(94%)</label><BR>
-            <label class="tx-secondary" tkey="totalSupplyInfo">The total supply minted to date.</label>
             <h2><span id="totalCoins">N/A</span></h2>
           </div><!-- dash-content -->
         </div><!-- col-4 -->
-      </div><!-- row -->
+        <div class="col-lg-4">
+        <div class="dash-content dash-small-info">
+            <label class="tx-primary" tkey="totalSupply">Current Emission</label>
+            <label class="tx-primary" id="totalCoinsPct"></label><br>
+            <label class="tx-secondary" tkey="totalSupplyInfo">The percent of total supply minted to date.</label>
+            <h2><span id="totalCoins">95%</span></h2>
+          </div>
+        </div> 
+      </div>   
     </div>
 
     <div class="nav-statistics-wrapper">
       <nav class="nav">
-        <a href="" class="nav-link active" tkey="overview">Overview</a>
+<!--        <a href="" class="nav-link active" tkey="overview">Overview</a>  -->
       </nav>
     </div><!-- nav-statistics-wrapper -->
 
@@ -48,7 +48,7 @@
         <h1 class="tx-white tx-56 tx-lato tx-bold"><span id="networkDifficulty">N/A</span></h1>
         <h6 class="tx-15 tx-primary tx-bold mg-b-20" tkey="netDifficulty">Network Difficulty</h6>
         <p tkey="netDiffInfo">Chart shows network difficulty for the last 30 blocks.</p>
-        <a style="background-color: #222;border: 4px outset #ffef00;color:#ddd !important; border-image: url(/css/themes/gradi.gif) 15 stretch;" data-page="explorer.html" href="#explorer" class="statement-link" tkey="netExplorer">Explore Ledger<i
+        <a style="background-color: #222;border: 4px outset #ffef00;color:#ddd !important;border-radius:80px;/* border-image: url(/css/themes/gradi.gif) 15 stretch;*/" data-page="explorer.html" href="#explorer" class="statement-link" tkey="netExplorer">Explore Ledger<i
            class="fa fa-angle-right mg-l-5"></i></a>
         <p class="tx-12"></p>
       </div><!-- col-5 -->
@@ -88,11 +88,11 @@
       </div><!-- row -->
     </div>
 
-    <div class="report-summary-header">
+<!--    <div class="report-summary-header">
       <div>
         <h4 class="tx-white mg-b-3" tkey="miningInfo">Mining info</h4>
       </div>
-    </div><!-- d-flex -->
+    </div>
 
     <div class="card card-dash-one mg-t-20">
       <div class="row no-gutters">
@@ -100,28 +100,28 @@
           <div class="dash-content">
             <label class="tx-primary" tkey="currentReward">Current block reward</label>
             <h2><span id="currentReward">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
+          </div> 
+        </div>
         <div class="col-lg-4">
           <div class="dash-content dash-small-info">
             <label class="tx-primary" tkey="numOfMiners">Number of Miners</label>
             <h2><span id="numOfMiners">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
+          </div>
+        </div>
         <div class="col-lg-4">
           <div class="dash-content dash-small-info">
             <label class="tx-primary" tkey="sumPoolsHashrate">Pools speed</label>
             <h2><span id="sumPoolsHashrate">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-      </div><!-- row -->
+          </div>
+        </div>
+      </div> 
     </div>
-
+ -->
     <hr>
 
     <div class="nav-statistics-wrapper mg-t-20">
       <nav class="nav">
-        <a href="" class="nav-link active" tkey="markets">Market / Calculator</a>
+        <a href="" class="nav-link active">Market Data  -  Powered by CoinGecko</a>
       </nav>
     </div><!-- nav-statistics-wrapper -->
 
@@ -273,7 +273,7 @@
       // get market data
       $.getJSON("https://api.coingecko.com/api/v3/coins/fango?sparkline=true", function (data) {
         USDperCCX = data.market_data.current_price.usd;
-        $("#CCXToUSD").html("$ " + localizeNumber(data.market_data.current_price.usd.toFixed(2)));
+        $("#CCXToUSD").html("$ " + localizeNumber(data.market_data.current_price.usd.toFixed(4)));
         $("#CCXToBTC").html(data.market_data.current_price.btc.toFixed(8));
         $("#dailyVolume").html("$ " + localizeNumber(data.market_data.total_volume.usd.toFixed(0)));
 
@@ -299,7 +299,7 @@
               fill: true,
               borderWidth: 0,
               pointRadius: 1,
-              borderColor: 'gold'
+              borderColor: 'rgb(70, 41, 255)'
             }]
           },
           options: {
@@ -318,7 +318,7 @@
                   maxTicksLimit: 5,
                   fontSize: 10,
                   callback: function (value, index, values) {
-                    return '$' + value.toFixed(2);
+                    return '$' + value.toFixed(3);
                   }
                 },
                 gridLines: {
@@ -365,7 +365,7 @@
   };
 
   function renderLastBlock() {
-    $.getJSON("http://178.128.164.245:18180/getinfo", function (infoData) {
+    $.getJSON("http://fango.money:18180/getinfo", function (infoData) {
       updateText('totalBanked', getReadableCoins2(infoData.full_deposit_amount, 0));
 
       $.ajax({
@@ -428,15 +428,15 @@
     }
 
     diffAreaChart = new Chart(document.getElementById('diffAreaChart'), {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: labelData,
         datasets: [{
           data: smooth(diffData, 2),
-          backgroundColor: '#5478ff85',
+          backgroundColor: 'rgb(70, 41, 255)',
           fill: true,
           borderWidth: 0,
-          borderColor: '#0bc0ff'
+          borderColor: 'rgb(70, 41, 255)'
         }]
       },
       options: {

@@ -166,7 +166,7 @@ body {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #868ba1;
+  color: #a294ff;
   text-align: left;
   background-color:#aea888; }
 
@@ -587,7 +587,7 @@ pre {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px; }
+  margin-left: 0px; }
 
 .no-gutters {
   margin-right: 0;
@@ -11982,7 +11982,8 @@ textarea.parsley-success:focus {
     padding: 0;
     margin: 0;
     position: relative;
-    border: 3px outset #02B8FF;/* 
+    border-radius: 14px;
+/*    border: 4px outset rgb(31, 159, 180); 
     border-image-source: url(gradi.gif);
     border-image-outset: 0;
     border-image-repeat: stretch;
@@ -12040,7 +12041,7 @@ textarea.parsley-success:focus {
     .slim-navbar .nav-link .icon {
       font-size: 24px;
       line-height: 0;
-      color: #1b84e7; }
+      color: #00c4ff; }
       @media (min-width: 992px) {
         .slim-navbar .nav-link .icon {
           margin-right: 8px; } }
@@ -12836,7 +12837,7 @@ textarea.parsley-success:focus {
     border-top: 1px solid #dee2e6; }
     @media (min-width: 992px) {
       .card-dash-one .row > div + div {
-        border-left: 1px solid #dee2e6;
+/*        border-left: 1px solid #dee2e6; */
         border-top: 0; } }
   .card-dash-one .row > div:nth-child(odd) {
     background-color: #fcfcfc; }
@@ -40308,14 +40309,14 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 }
 
 .bg-primary-dark {
-  background-color: #343a40 !important;
-  border: 1px solid #212529 !important;
+  background-color: #000000 !important;
+/*  border: 1px solid #212529 !important;*/
 }
 
 .card-label {
   margin-right: 5px;
   font-weight: bold;
-  color: #ffcb00;
+  color: #00c4ff;
 }
 
 #apiInfo i,
@@ -40340,7 +40341,7 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 }
 
 .nav-link-last {
-  border-right-width: 1px !important;
+/*  border-right-width: 3px !important;*/
 }
 
 #calcHashHolder {
@@ -40460,7 +40461,7 @@ body {
 }
 
 .slim-logo a {
-  color: #FFD700 !important;
+  color: #e2b850 !important;
 }
 
 .nav-link i,
@@ -40468,12 +40469,12 @@ body {
 .statement-link,
 .nav-item.active a,
 .nav-statistics-wrapper .nav:first-child .nav-link {
-  color: #aaa !important;
+  color: #00c4ff;
 }
 
 .statement-link,
 .nav-statistics-wrapper .nav:first-child .nav-link::before {
-  border-color: #FFD700 !important;
+  border-color: #333 !important;
 }
 
 a {
@@ -40584,8 +40585,8 @@ a {
 }
 
 #toolsNavItem {
-  border-right: 1px solid #343a40;
-  border-left: 0px none;
+/*  border-right: 1px solid #343a40;
+  border-left: 0px none;*/
 }
 
 /******************** NODE TABLE *********************/

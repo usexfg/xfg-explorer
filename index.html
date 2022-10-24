@@ -4,9 +4,9 @@
 <head lang="en">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="icon" type="image/icon" href="favicon.ico">
-  <title>Fango Explorer</title>
+  <link rel="shortcut icon" href="xfg.png">
+  <link rel="icon" type="image/icon" href="xfg.png">
+  <title>Fuego Explorer</title>
   <!-- vendor css -->
   <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -49,14 +49,15 @@
   <div class="slim-header">
     <div class="container">
       <div class="slim-header-left headerLogo">
-        <img src="img/xfg.gif" width="48" height="58">
+<!--        <img src="img/xfg.gif" width="48" height="58"> -->
         <div class="logoText">
           <h2 class="slim-logo">
-            <a href="https://fandom.gold">
-              <span style="font-family:Orbitron;">FANG0</span></a>
+            <a href="https://fango.money">
+<img src="img/yeysk-regular.png" style="height: 29px;">
           </h2>
         </div>
       </div>
+</a>
       <!-- slim-header-left -->
       <div class="slim-header-right headerSearch">
         <div id="stats_updated" style="display: none;">
@@ -66,7 +67,7 @@
         <div class="search-box">
           <input type="text" id="txt_search" class="form-control" tplaceholder="searchHint"
             placeholder="Search by block height / hash, transaction hash, payment id">
-          <button id="btn_search" class="btn btn-primary"style="background-color:#ccc !important;">
+          <button id="btn_search" class="btn btn-primary"style="background-color:#fff !important;">
             <i class="fa fa-search"></i>
           </button>
         </div>
@@ -95,7 +96,7 @@
     <div class="container">
       <ul class="nav" id="mainNavigation">
         <li class="nav-item active" style="flex:1 1 0;">
-          <a class="nav-link hot_link" data-page="dashboard.html" href="#">
+          <a class="nav-link hot_link" style="color:aliceblue;"data-page="dashboard.html" href="#">
             <i class="icon ion-ios-home-outline"></i>
             <span tkey="dashboard">Dashboard</span>
           </a>
@@ -114,25 +115,25 @@
         </li>
        <li class="nav-item" style="flex:1 1 0;">
           <a class="nav-link hot_link nav-link-last" data-page="infra.html" href="#infra">
-            <i class="fa fa-rebel" style="font-size: 18px;margin-right: 5px;"></i>
+            <i class="fa fa-rebel" style="font-size: 18px;margin-right: 5px;color:#00c4ff;"></i>
             <span tkey="nodes">Elder Nodes</span>
            </a>
         </li>
         <li class="nav-item" style="flex:1 1 0;">
           <a class="nav-link hot_link nav-link-last" data-page="digm.html" href="#digminfo">
-            <i class="fa fa-music" style="font-size: 20px;margin-right: 5px;"></i>
+            <i class="fa fa-music" style="font-size: 20px;margin-right: 5px;color:#00c4ff;"></i>
             <span tkey="digm">DIGM</span>
           </a>
         </li>
         <li class="nav-item with-sub" style="flex:1 1 0;">
-          <a class="nav-link" href="#" data-toggle="dropdown" id="toolsNavItem">
+          <a class="nav-link" style=""href="#" data-toggle="dropdown" id="toolsNavItem">
             <i class="icon ion-ios-analytics-outline"></i>
             <span tkey="resources">Tools</span>
           </a>
           <div class="sub-item">
             <ul>
               <li>
-                <a class="hot_link" data-page="txviewer.html" href="#txViewer">
+                <a class="hot_link" data-page="chktxn.html" href="#txViewer">
                   <i class="fa ion-ios-book-outline icon-dropdown"></i><span tkey="txViewer">Verify TXN</span>
                 </a>
               </li>
@@ -149,6 +150,11 @@
               <li>
                 <a class="hot_link" data-page="api.html" href="#api">
                   <i class="fa fa-gears icon-dropdown"></i><span tkey="api">API</span>
+                </a>
+              </li>
+              <li>
+                <a class="hot_link" href="http://testnet.fango.money">
+                  <i class="fa fa-gears icon-dropdown"></i><span>TESTNET</span>
                 </a>
               </li>
               <li>
@@ -188,7 +194,7 @@
 
   <div class="slim-footer" id="explorerFooter">
     <div class="container">
-      <p>Contribute to this site at<a href="https://github.com/fandomgold/fango-explorer"> <i class="fa fa-github"></i>  Fandom Gold Society</a></p>
+      <p>Contribute to this project at<a href="https://github.com/fandomgold/fango-explorer"> <i class="fa fa-github"></i>  Fandom Gold Society</a></p>
     </div>
     <!-- container -->
   </div>
