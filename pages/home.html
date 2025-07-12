@@ -119,6 +119,10 @@
             });
         },
         update: function() {
+            if (!lastStats || typeof lastStats.height === 'undefined' || typeof lastStats.tx_count === 'undefined' || typeof lastStats.difficulty === 'undefined' || typeof lastStats.last_known_block_index === 'undefined') {
+                console.error("lastStats is not ready or missing required properties");
+                return;
+            }
             renderLastBlock();
             updateText('networkHeight', localizeNumber(lastStats.height.toString()));
             updateText('networkTransactions', localizeNumber(lastStats.tx_count.toString()));
@@ -301,6 +305,10 @@
     });
 
     function renderInitialBlocks() {
+        if (!lastStats || typeof lastStats.last_known_block_index === 'undefined') {
+            console.error("lastStats is not ready or missing last_known_block_index");
+            return;
+        }
         if (xhrGetBlocks) xhrGetBlocks.abort();
         var loadHeight;
 
