@@ -88,7 +88,7 @@
     </div><!-- col-3 -->
     <div class="col-lg-3">
       <div class="dash-content dash-small-info">
-        <label class="tx-primary" tkey="totalBurned">Total Ethereal TEST (Burned)</label>
+        <label class="tx-primary" tkey="totalBurned">Total Burned TEST </label>
         <h2><span id="totalBurned">N/A</span></h2>
       </div><!-- dash-content -->
     </div><!-- col-3 -->
@@ -210,34 +210,39 @@
     calcEstimateProfit();
   });
 
-  // Function to fetch burned total
-  function loadBurnedTotal() {
-    if (xhrGetBurnedTotal) xhrGetBurnedTotal.abort();
-    xhrGetBurnedTotal = $.ajax({
-      url: api + '/json_rpc',
-      method: "POST",
-      data: JSON.stringify({
-        jsonrpc: "2.0",
-        id: "burned_total",
-        method: "get_eternal_flame",
-        params: {}
-      }),
-      dataType: 'json',
-      cache: 'false',
-      success: function(data) {
-        if (data && data.result) {
-          // Update the burned total display
-          var formattedAmount = data.result.formattedAmount || 
-                               (getReadableCoins2(data.result.eternalFlameAmount, 0));
-          updateText('totalBurned', formattedAmount);
-        }
-      },
-      error: function(xhr, status, error) {
-        console.log('Error fetching burned total:', error);
-        updateText('totalBurned', 'N/A');
+// Function to fetch burned total
+function loadBurnedTotal() {
+  if (xhrGetBurnedTotal) xhrGetBurnedTotal.abort();
+  xhrGetBurnedTotal = $.ajax({
+    url: api + '/json_rpc',
+    method: "POST",
+    data: JSON.stringify({
+      jsonrpc: "2.0",
+      id: "burned_total",
+      method: "getTotalBurnedXfg",
+      params: {}
+    }),
+    dataType: 'json',
+    cache: 'false',
+    success: function(data) {
+      if (data && data.result) {
+        // Update the burned total display
+        var formattedAmount = data.result.formattedAmount || 
+                             (getReadableCoins2(data.result.totalBurnedXfg || 0, 0));
+        updateText('totalBurned', formattedAmount);
       }
-    });
-  }
+    },
+    error: function(xhr, status, error) {
+      // Only log actual errors, not aborts
+      if (error !== 'abort') {
+        console.log('Error fetching burned total:', error);
+      }
+      updateText('totalBurned', 'N/A');
+    }
+  });
+}
+
+
 
   function initializePoolData() {
     $.getJSON(poolListUrl, function (data, textStatus, jqXHR) {
