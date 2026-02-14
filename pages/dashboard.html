@@ -57,36 +57,43 @@
       </div><!-- col-7 -->
     </div><!-- row -->
 
-    <hr>
+  
+<hr>
 
-    <div class="report-summary-header">
-      <div>
-        <h4 class="tx-white mg-b-3" tkey="netOverallSummary">Overall Network Summary</h4>
-      </div>
-    </div><!-- d-flex -->
+<div class="report-summary-header">
+  <div>
+    <h4 class="tx-white mg-b-3" tkey="netOverallSummary">Overall Network Summary</h4>
+  </div>
+</div><!-- d-flex -->
 
-    <div class="card card-dash-one mg-t-20">
-      <div class="row no-gutters">
-        <div class="col-lg-4">
-          <div class="dash-content">
-            <label class="tx-primary" tkey="blockchainHeight">Blockchain Height</label>
-            <h2><span id="networkHeight">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-        <div class="col-lg-4">
-          <div class="dash-content dash-small-info">
-            <label class="tx-primary" tkey="transactions">Transactions</label>
-            <h2><span id="networkTransactions">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-        <div class="col-lg-4">
-          <div class="dash-content dash-small-info">
-            <label class="tx-primary" tkey="netHashrate">Network Hashrate</label>
-            <h2><span id="networkHashrate">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-      </div><!-- row -->
-    </div>
+<div class="card card-dash-one mg-t-20">
+  <div class="row no-gutters">
+    <div class="col-lg-3">
+      <div class="dash-content">
+        <label class="tx-primary" tkey="blockchainHeight">Blockchain Height</label>
+        <h2><span id="networkHeight">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+    <div class="col-lg-3">
+      <div class="dash-content dash-small-info">
+        <label class="tx-primary" tkey="transactions">Transactions</label>
+        <h2><span id="networkTransactions">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+    <div class="col-lg-3">
+      <div class="dash-content dash-small-info">
+        <label class="tx-primary" tkey="netHashrate">Network Hashrate</label>
+        <h2><span id="networkHashrate">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+    <div class="col-lg-3">
+      <div class="dash-content dash-small-info">
+        <label class="tx-primary" tkey="totalBurned">Total Ethereal TEST (Burned)</label>
+        <h2><span id="totalBurned">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+  </div><!-- row -->
+</div>
 
 <!--    <div class="report-summary-header">
       <div>
@@ -191,6 +198,7 @@
   var USDperCCX = null;
   var diffAreaChart = null;
   var marketPriceAreaChart = null;
+  var xhrGetBurnedTotal = null; // Add this for burned total requests
 
   // Automatically update profit calculation on key press
   $('#calcHashRate').keyup(calcEstimateProfit).change(calcEstimateProfit);
@@ -201,6 +209,35 @@
     $('#calcHashUnit').text($(this).text()).data('mul', $(this).data('mul'));
     calcEstimateProfit();
   });
+
+  // Function to fetch burned total
+  function loadBurnedTotal() {
+    if (xhrGetBurnedTotal) xhrGetBurnedTotal.abort();
+    xhrGetBurnedTotal = $.ajax({
+      url: api + '/json_rpc',
+      method: "POST",
+      data: JSON.stringify({
+        jsonrpc: "2.0",
+        id: "burned_total",
+        method: "get_eternal_flame",
+        params: {}
+      }),
+      dataType: 'json',
+      cache: 'false',
+      success: function(data) {
+        if (data && data.result) {
+          // Update the burned total display
+          var formattedAmount = data.result.formattedAmount || 
+                               (getReadableCoins2(data.result.eternalFlameAmount, 0));
+          updateText('totalBurned', formattedAmount);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.log('Error fetching burned total:', error);
+        updateText('totalBurned', 'N/A');
+      }
+    });
+  }
 
   function initializePoolData() {
     $.getJSON(poolListUrl, function (data, textStatus, jqXHR) {
@@ -250,6 +287,9 @@
       $("#currentDate").html("Today is: " + moment().format('MMMM Do YYYY'));
       initializePoolData();
       loadTranslations();
+
+      // Load burned total on init
+      loadBurnedTotal();
 
       $.ajax({
         url: api + '/json_rpc',
@@ -360,6 +400,10 @@
       updateText('networkTransactions', localizeNumber(lastStats.tx_count.toString()));
       updateText('networkHashrate', getReadableHashRateString(lastStats.difficulty / blockTargetInterval));
       updateText('networkDifficulty', getReadableDifficultyString(lastStats.difficulty, 0));
+      
+      // Refresh burned total on update
+      loadBurnedTotal();
+      
       $("time.timeago").timeago();
     }
   };
@@ -472,3 +516,4 @@
     });
   }
 </script>
+
