@@ -1,14 +1,12 @@
-# XFG Explorer
+# TEST Explorer
 
-Runs on data from your fuego dæmon. Should be ready to go for use on web servers.
+Runs on data from your Fuego Testnet dæmon (`testnetd`) & should be ready to go for web servers.
 
-Start your Fango dæmon using command:
+Start your dæmon using command:
 
-<sup>```./fuegod --enable-cors=* -i --rpc-bind-ip=0.0.0.0 --rpc-bind-port=18180```</sup>
+<sup>```./testnetd --enable-cors=* -i --rpc-bind-ip=0.0.0.0 --rpc-bind-port=28280```</sup>
 
-Change config.js to point to your dæmon. Files go to your web root folder (/var/www/html)
-
-Join us in :point_right: [Discord](http://discord.fandom.gold) 
+Edit config.js to point to your dæmon. Repo folder goes in your web folder root (/var/www/html)
 
 ### Note
 Based on code from the Conceal Explorer & Karbovanets/Karbowanec-Blockchain-Explorer
