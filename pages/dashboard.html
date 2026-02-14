@@ -219,7 +219,7 @@ function loadBurnedTotal() {
     data: JSON.stringify({
       jsonrpc: "2.0",
       id: "burned_total",
-      method: "getTotalBurnedXfg",
+      method: "getEternalFlame",
       params: {}
     }),
     dataType: 'json',
@@ -228,7 +228,7 @@ function loadBurnedTotal() {
       if (data && data.result) {
         // Update the burned total display
         var formattedAmount = data.result.formattedAmount || 
-                             (getReadableCoins2(data.result.totalBurnedXfg || 0, 0));
+                             (getReadableCoins2(data.result.ethernalXFG || 0, 0));
         updateText('totalBurned', formattedAmount);
       }
     },
@@ -241,6 +241,7 @@ function loadBurnedTotal() {
     }
   });
 }
+
 
 
 
