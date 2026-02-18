@@ -222,14 +222,8 @@
 function loadBurnedTotal() {
   if (xhrGetBurnedTotal) xhrGetBurnedTotal.abort();
   xhrGetBurnedTotal = $.ajax({
-    url: api + '/json_rpc',
-    method: "POST",
-    data: JSON.stringify({
-      jsonrpc: "2.0",
-      id: "burned_total",
-      method: "getethereal",
-      params: {}
-    }),
+    url: api + '/getethereal',  // Direct endpoint, not through json_rpc
+    method: "GET",              // This endpoint uses GET, not POST
     dataType: 'json',
     cache: 'false',
     success: function(data) {
@@ -251,6 +245,7 @@ function loadBurnedTotal() {
     }
   });
 }
+
 
 
 
