@@ -219,7 +219,6 @@
   });
 
 // Function to fetch burned total
-// Function to fetch burned total
 function loadBurnedTotal() {
   if (xhrGetBurnedTotal) xhrGetBurnedTotal.abort();
   xhrGetBurnedTotal = $.ajax({
@@ -228,7 +227,7 @@ function loadBurnedTotal() {
     data: JSON.stringify({
       jsonrpc: "2.0",
       id: "burned_total",
-      method: "getEternalFlame",
+      method: "getethereal",
       params: {}
     }),
     dataType: 'json',
