@@ -218,37 +218,6 @@
     calcEstimateProfit();
   });
 
-// Function to fetch burned total
-function loadBurnedTotal() {
-  if (xhrGetBurnedTotal) xhrGetBurnedTotal.abort();
-  xhrGetBurnedTotal = $.ajax({
-    url: api + '/getethereal',  // Direct endpoint, not through json_rpc
-    method: "GET",              // This endpoint uses GET, not POST
-    dataType: 'json',
-    cache: 'false',
-    success: function(data) {
-      if (data && data.result) {
-        // Update the burned total display
-        var formattedAmount = data.result.formattedAmount ||
-                             (getReadableCoins2(data.result.ethernalXFG || 0, 0));
-        updateText('burnedCoins', formattedAmount);
-        updateText('totalBurnedAlt', formattedAmount);
-      }
-    },
-    error: function(xhr, status, error) {
-      // Only log actual errors, not aborts
-      if (error !== 'abort') {
-        console.log('Error fetching burned total:', error);
-      }
-      updateText('burnedCoins', 'N/A');
-      updateText('totalBurnedAlt', 'N/A');
-    }
-  });
-}
-
-
-
-
 
   function initializePoolData() {
     $.getJSON(poolListUrl, function (data, textStatus, jqXHR) {
@@ -299,8 +268,6 @@ function loadBurnedTotal() {
       initializePoolData();
       loadTranslations();
 
-      // Load burned total on init
-      loadBurnedTotal();
 
       $.ajax({
         url: api + '/json_rpc',
@@ -411,15 +378,18 @@ function loadBurnedTotal() {
       updateText('networkTransactions', localizeNumber(lastStats.tx_count.toString()));
       updateText('networkHashrate', getReadableHashRateString(lastStats.difficulty / blockTargetInterval));
       updateText('networkDifficulty', getReadableDifficultyString(lastStats.difficulty, 0));
-      
-      // Refresh burned total on update
-      loadBurnedTotal();
+    
       
       $("time.timeago").timeago();
     }
   };
 function renderLastBlock() {
   $.getJSON("http://103.101.201.136:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
+// Update burned coins
+    var burnedCoins = infoData.ethernalxfg || 0;
+    updateText('burnedCoins', getReadableCoins2(burnedCoins, 0));
+    updateText('totalBurnedAlt', getReadableCoins2(burnedCoins, 0));
+    
     // Update banked coins (COLD)
     var bankedCoins = infoData.full_deposit_amount;
     updateText('depositCoins', getReadableCoins2(bankedCoins, 0));
