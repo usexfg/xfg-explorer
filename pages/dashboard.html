@@ -386,7 +386,7 @@
 function renderLastBlock() {
   $.getJSON("http://103.101.201.136:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
 // Update burned coins
-    var burnedCoins = infoData.ethernalxfg || 0;
+    var burnedCoins = infoData.ethereal_xfg || 0;
     updateText('burnedCoins', getReadableCoins2(burnedCoins, 0));
     updateText('totalBurnedAlt', getReadableCoins2(burnedCoins, 0));
     
