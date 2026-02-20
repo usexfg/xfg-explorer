@@ -419,7 +419,7 @@ function loadBurnedTotal() {
     }
   };
 function renderLastBlock() {
-  $.getJSON("http://127.0.0.1:28280/getinfo", function (infoData) {
+  $.getJSON("http://103.101.201.136:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
     // Update banked coins (COLD)
     var bankedCoins = infoData.full_deposit_amount;
     updateText('depositCoins', getReadableCoins2(bankedCoins, 0));
