@@ -9,33 +9,43 @@
     </div><!-- dash-headline-two -->
 
     <div class="card card-dash-one mg-t-20">
-      <div class="row no-gutters">
-        <div class="col-lg-4">
-          <div class="dash-content">
-            <label class="tx-primary" tkey="totalBanked">Total Banked</label>
-            <label class="tx-primary" id="depositCoinsPct"></label><BR>
-            <label class="tx-secondary">Amount currently locked in COLD Banking</label>
-            <h2><span id="depositCoins">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-        <div class="col-lg-4">
-          <div class="dash-content dash-small-info">
-            <label class="tx-primary" tkey="circulatingSupply">Circulating Supply</label>
-            <label class="tx-primary" id="emissionPercentPct"></label><BR>
-            <label class=" tx-secondary" tkey="circulatingSuppyInfo">The total number of coins not banked.</label>
-            <h2><span id="emissionPercent">N/A</span></h2>
-          </div><!-- dash-content -->
-        </div><!-- col-4 -->
-        <div class="col-lg-4">
-        <div class="dash-content dash-small-info">
-            <label class="tx-primary" tkey="totalSupply">Current Total Supply</label>
-            <label class="tx-primary" id="totalCoinsPct"></label><br>
-            <label class="tx-secondary" tkey="totalSupplyInfo">The total supply minted to date.</label>
-            <h2><span id="totalCoins">N/A</span></h2>
-          </div>
-        </div> 
-      </div>   
+  <div class="row no-gutters">
+    <div class="col-lg-3">
+      <div class="dash-content">
+        <label class="tx-primary" tkey="totalBurned">Total Burned</label>
+        <BR>
+        <label class="tx-secondary">Total amount of XFG burned</label>
+        <h2><span id="burnedCoins">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+    <div class="col-lg-3">
+      <div class="dash-content">
+        <label class="tx-primary" tkey="totalBanked">Total Banked</label>
+        <BR>
+        <label href="http://cold.usexfg.org" class="tx-secondary">Total amount of XFG in COLD</label>
+        <h2><span id="depositCoins">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+    <div class="col-lg-3">
+      <div class="dash-content dash-small-info">
+        <label class="tx-primary" tkey="circulatingSupply">Circulating Supply</label>
+        <BR>
+        <label class=" tx-secondary" tkey="circulatingSuppyInfo">Total active XFG not banked.</label>
+        <h2><span id="circulatingSupply">N/A</span></h2>
+      </div><!-- dash-content -->
+    </div><!-- col-3 -->
+    <div class="col-lg-3">
+    <div class="dash-content dash-small-info">
+        <label class="tx-primary" tkey="totalSupply">Total Supply</label>
+        <br>
+        <label class="tx-secondary" tkey="totalSupplyInfo">Total supply minted to date.</label>
+        <h2><span id="totalSupply">N/A</span></h2>
+      </div>
     </div>
+  </div>
+</div>
+
+
 
     <div class="nav-statistics-wrapper">
       <nav class="nav">
@@ -372,54 +382,65 @@
   };
 
   function renderLastBlock() {
-    $.getJSON("http://127.0.0.1:18180/getinfo", function (infoData) {
-      updateText('totalBanked', getReadableCoins2(infoData.full_deposit_amount, 0));
+  $.getJSON("http://103.101.201.136:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
+// Update burned coins
+    var burnedCoins = infoData.ethereal_xfg || 0;
+    updateText('burnedCoins', getReadableCoins2(burnedCoins, 0));
+    updateText('totalBurnedAlt', getReadableCoins2(burnedCoins, 0));
+    
+    // Update banked coins (COLD)
+    var bankedCoins = infoData.full_deposit_amount;
+    updateText('depositCoins', getReadableCoins2(bankedCoins, 0));
 
-      $.ajax({
-        url: api + '/json_rpc',
-        method: "POST",
-        data: JSON.stringify({
-          jsonrpc: "2.0",
-          id: "test",
-          method: "getlastblockheader",
-          params: {}
-        }),
-        dataType: 'json',
-        cache: 'false',
-        success: function (data) {
-          last_block_hash = data.result.block_header.hash;
-          last_block_deposts = data.result.block_header.deposits;
-          $.ajax({
-            url: api + '/json_rpc',
-            method: "POST",
-            data: JSON.stringify({
-              jsonrpc: "2.0",
-              id: "test",
-              method: "f_block_json",
-              params: {
-                hash: last_block_hash
-              }
-            }),
-            dataType: 'json',
-            cache: 'false',
-            success: function (data) {
-              var block = data.result.block;
-              var circulating_supply = block.alreadyGeneratedCoins - last_block_deposts;
-              var circulating_supply_pct = ((circulating_supply / block.alreadyGeneratedCoins) * 100).toFixed(2);
-              var last_block_deposts_pct = ((last_block_deposts / block.alreadyGeneratedCoins) * 100).toFixed(2);
-              updateText('totalCoins', getReadableCoins2(block.alreadyGeneratedCoins, 0));
-              updateText('emissionPercent', getReadableCoins2(circulating_supply, 0));
-              updateText('emissionPercentPct', "(" + circulating_supply_pct + "%)");
-              updateText('currentReward', getReadableCoins(block.baseReward, 2));
-              updateText('depositCoins', getReadableCoins2(last_block_deposts, 0));
-              updateText('depositCoinsPct', "(" + last_block_deposts_pct + "%)");
-
+    $.ajax({
+      url: api + '/json_rpc',
+      method: "POST",
+      data: JSON.stringify({
+        jsonrpc: "2.0",
+        id: "test",
+        method: "getlastblockheader",
+        params: {}
+      }),
+      dataType: 'json',
+      cache: 'false',
+      success: function (data) {
+        last_block_hash = data.result.block_header.hash;
+        last_block_deposts = data.result.block_header.deposits;
+        $.ajax({
+          url: api + '/json_rpc',
+          method: "POST",
+          data: JSON.stringify({
+            jsonrpc: "2.0",
+            id: "test",
+            method: "f_block_json",
+            params: {
+              hash: last_block_hash
             }
-          });
-        }
-      });
+          }),
+          dataType: 'json',
+          cache: 'false',
+          success: function (data) {
+            var block = data.result.block;
+
+            // Update total supply
+            var totalSupply = block.alreadyGeneratedCoins;
+            updateText('totalSupply', getReadableCoins2(totalSupply, 0));
+
+            // Update banked coins (from block data)
+            updateText('depositCoins', getReadableCoins2(last_block_deposts, 0));
+
+            // Update circulating supply
+            var circulatingSupply = totalSupply - last_block_deposts;
+            updateText('circulatingSupply', getReadableCoins2(circulatingSupply, 0));
+
+            // Update other block info
+            updateText('currentReward', getReadableCoins(block.baseReward, 2));
+          }
+        });
+      }
     });
-  }
+  });
+}
 
   function renderDiffChart(blocksData) {
     var diffData = [];
