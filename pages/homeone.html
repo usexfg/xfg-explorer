@@ -663,7 +663,7 @@ function displayDiffChart() {
 				type: "line",
 				backgroundColor: 'rgba(0, 0, 255, 0.3)',
 				borderColor: '#70f',
-				borderWidth: 2,
+				borderWidth: 3,
 				pointColor : '#70f',
 				pointBorderColor : '#70f',
 				pointHighlightFill: '#70f',
@@ -693,7 +693,7 @@ function displayDiffChart() {
                                 yAxisID: "Sizes",
                                 label: "Size",
                                 type: "line",  
-                                backgroundColor:'rgba(255, 200, 0, 0.2)',
+                                backgroundColor:'',
                                 borderColor: '#ffc800',
                                 borderWidth: 3,
                                 pointBorderWidth: 1,
@@ -709,7 +709,7 @@ function displayDiffChart() {
 			maintainAspectRatio: false,
 			elements: {
 				line: {
-					tension: 0
+					tension: 0.333
 				}
 			},
 			title: {
@@ -739,7 +739,7 @@ function displayDiffChart() {
 			},{
 				id: 'Difficulty',
 				type: 'linear',
-				position: 'left',
+				position: 'right',
 				scaleLabel: {
 					display: true,
 					labelString: 'Difficulty'
@@ -772,7 +772,7 @@ function displayDiffChart() {
 			  },{
 				id: 'Sizes',
 				type: 'linear',
-				position: 'right',
+				position: 'left',
 				scaleLabel: {
 					display: true,
 					labelString: 'Size'
