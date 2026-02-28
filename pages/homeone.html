@@ -647,7 +647,7 @@ function displayDiffChart() {
 			  {
 				data: [].concat(Blocks).reverse(),
 				yAxisID: "Height",
-				label: "",
+				label: "Block",
 				backgroundColor: "rgba(0,0,0,0)",
 				borderColor: 'rgba(0,0,0,0)',
 				borderWidth: 0,
@@ -659,19 +659,19 @@ function displayDiffChart() {
 			  },{
 				data: [].concat(Difficulties).reverse(),
 				yAxisID: "Difficulty",
-				label: "",
-				backgroundColor: 'rgba(0,0,0,0)',
-				borderColor: 'rgba(0,0,0,0)',
-				borderWidth: 0,
-				pointColor : 'rgba(0,0,0,0)',
-				pointBorderColor : 'rgba(0,0,0,0)',
-				pointHighlightFill: 'rgba(0,0,0,0)',
-				pointBackgroundColor: 'rgba(0,0,0,0)',
-				pointBorderWidth: 0,
-				pointRadius: 0,
-				pointHoverRadius: 0,
-				pointHitRadius: 0,
-				display: false
+				label: "Difficulty",
+				backgroundColor: 'rgba(0, 0, 255, 0.25)',
+				borderColor: '#70f',
+				borderWidth: 2,
+				pointColor : '#70f',
+				pointBorderColor : '#70f',
+				pointHighlightFill: '#70f',
+				pointBackgroundColor: '#70f',
+				pointBorderWidth: 3,
+				pointRadius: 1,
+				pointHoverRadius: 3,
+				pointHitRadius: 20,
+				display: true
                           }, {
                                 data: [].concat(Txses).reverse(),
                                 yAxisID: "Transactions",
@@ -693,7 +693,7 @@ function displayDiffChart() {
                                 yAxisID: "Sizes",
                                 label: "Size",
                                 type: "line",
-                                backgroundColor:'#c8a90069',
+                                backgroundColor:'rgba(245, 191, 39, 0.2)',
                                 borderColor: '#ffc800',
                                 borderWidth: 3,
                                 pointBorderWidth: 1,
@@ -741,17 +741,17 @@ function displayDiffChart() {
 				type: 'linear',
 				position: 'left',
 				scaleLabel: {
-					display: false,
+					display: true,
 					labelString: 'Difficulty'
 				},
 				gridLines: {
-					display:false
+					display:true
 				},
 				ticks: {
-					fontSize: 12,
-					display:false
+					fontSize: 15,
+					display:true
 				},
-				display: false
+				display: true
 			  },{
 				id: 'Transactions',
 				type: 'linear',
@@ -765,7 +765,7 @@ function displayDiffChart() {
 					display:true
 				},
 				ticks: {
-					fontSize: 12,
+					fontSize: 14,
 					display:true
 				},
 				display: true
