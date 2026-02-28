@@ -647,7 +647,7 @@ function displayDiffChart() {
 			  {
 				data: [].concat(Blocks).reverse(),
 				yAxisID: "Height",
-				label: "Block",
+				label: "",
 				backgroundColor: "rgba(0,0,0,0)",
 				borderColor: 'rgba(0,0,0,0)',
 				borderWidth: 0,
@@ -660,7 +660,8 @@ function displayDiffChart() {
 				data: [].concat(Difficulties).reverse(),
 				yAxisID: "Difficulty",
 				label: "Difficulty",
-				backgroundColor: 'rgba(0, 0, 255, 0.25)',
+				type: "line",
+				backgroundColor: 'rgba(0, 0, 255, 0.3)',
 				borderColor: '#70f',
 				borderWidth: 2,
 				pointColor : '#70f',
@@ -676,10 +677,9 @@ function displayDiffChart() {
                                 data: [].concat(Txses).reverse(),
                                 yAxisID: "Transactions",
 				label: "Transactions",
-				type: "bar",
-                                backgroundColor: "#b0e9ff4d",
-                                borderColor: "#00bfff",
-           			borderWidth: 2,
+                backgroundColor: "#b0e9ff4d",
+                borderColor: "#00bfff",
+           		borderWidth: 2,
 				pointColor : "#00bfff",
 				pointBorderColor : "#00bfff",
 				pointHighlightFill: "#00bfff",
@@ -692,8 +692,8 @@ function displayDiffChart() {
                                 data: [].concat(Sizes).reverse(),
                                 yAxisID: "Sizes",
                                 label: "Size",
-                                type: "line",
-                                backgroundColor:'rgba(245, 191, 39, 0.2)',
+                                type: "line",  
+                                backgroundColor:'rgba(255, 200, 0, 0.2)',
                                 borderColor: '#ffc800',
                                 borderWidth: 3,
                                 pointBorderWidth: 1,
@@ -726,7 +726,7 @@ function displayDiffChart() {
                                position: 'left',
                                 scaleLabel: {
                                         display: false,
-                                        labelString: ''
+                                        labelString: 'Block'
                                 },
                                 gridLines: {
                                         display:false
