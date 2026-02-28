@@ -657,6 +657,21 @@ function displayDiffChart() {
 				pointHitRadius: 0,
 				display: false
 			  },{
+                data: [].concat(Txses).reverse(),
+                yAxisID: "Transactions",
+				label: "Transactions",
+                backgroundColor: "#b0e9ff4d",
+                borderColor: "#00bfff",
+           		borderWidth: 2,
+				pointColor : "#00bfff",
+				pointBorderColor : "#00bfff",
+				pointHighlightFill: "#00bfff",
+				pointBackgroundColor: "#00bfff",
+				pointBorderWidth: 3,
+				pointRadius: 1,
+				pointHoverRadius: 3,
+				pointHitRadius: 20
+			},{
 				data: [].concat(Difficulties).reverse(),
 				yAxisID: "Difficulty",
 				label: "Difficulty",
@@ -673,27 +688,12 @@ function displayDiffChart() {
 				pointHoverRadius: 3,
 				pointHitRadius: 20,
 				display: true
-                          }, {
-                                data: [].concat(Txses).reverse(),
-                                yAxisID: "Transactions",
-				label: "Transactions",
-                backgroundColor: "#b0e9ff4d",
-                borderColor: "#00bfff",
-           		borderWidth: 2,
-				pointColor : "#00bfff",
-				pointBorderColor : "#00bfff",
-				pointHighlightFill: "#00bfff",
-				pointBackgroundColor: "#00bfff",
-				pointBorderWidth: 3,
-				pointRadius: 1,
-				pointHoverRadius: 3,
-				pointHitRadius: 20
-			}, {
+            },{
                                 data: [].concat(Sizes).reverse(),
                                 yAxisID: "Sizes",
                                 label: "Size",
                                 type: "line",  
-                                backgroundColor:'',
+                                backgroundColor:'#ffc800',
                                 borderColor: '#ffc800',
                                 borderWidth: 3,
                                 pointBorderWidth: 1,
