@@ -709,7 +709,7 @@ function displayDiffChart() {
 			maintainAspectRatio: false,
 			elements: {
 				line: {
-					tension: 0.333
+					tension: 0.08
 				}
 			},
 			title: {
@@ -753,13 +753,12 @@ function displayDiffChart() {
 				},
 				display: true
 			  },{
-				id: 'Transactions',
+				id: 'Sizes',
 				type: 'linear',
 				position: 'left',
- 				barThickness: 30,
 				scaleLabel: {
 					display: true,
-					labelString: 'Transactions'
+					labelString: 'Size'
 				},
 				gridLines: {
 					display:true
@@ -770,12 +769,13 @@ function displayDiffChart() {
 				},
 				display: true
 			  },{
-				id: 'Sizes',
+				id: 'Transactions',
 				type: 'linear',
 				position: 'left',
+ 				barThickness: 30,
 				scaleLabel: {
 					display: true,
-					labelString: 'Size'
+					labelString: 'Transactions'
 				},
 				gridLines: {
 					display:true
