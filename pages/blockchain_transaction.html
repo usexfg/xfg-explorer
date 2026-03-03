@@ -164,8 +164,8 @@
       updateText('transaction.timestamp', formatDate(block.timestamp));
       $(".transaction-timeago").timeago('update', new Date(block.timestamp * 1000).toISOString());
     }
-    updateText('transaction.amount_out', getReadableCoins(details.amount_out, 6));
-    updateText('transaction.fee', getReadableCoins(details.fee, 6));
+    updateText('transaction.amount_out', getReadableCoins(details.amount_out, 7));
+    updateText('transaction.fee', getReadableCoins(details.fee, 4));
     updateText('transaction.mixin', localizeNumber(details.mixin));
     if (!details.mixin)
       $('#div_transaction_mixin').hide();
