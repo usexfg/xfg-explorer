@@ -9,8 +9,8 @@
 				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blockDifficultyHint" data-original-title="How difficult it is to find a solution for the block. More specifically, it`s mathematical expectation for number of hashes a miner needs to calculate in order to find a correct nonce value solving the block."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blockDifficulty"> Difficulty: </span><span id="block.difficulty"></span></div>
 				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blockOrphanHint" data-original-title="True, if the block belongs to an alternative chain. In such case all the transactions, excluding coinbase, are removed from the block back to transaction pool to be included in another block. It means there is no reward for the miner."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blockOrphan"> Orphan: </span><span id="block.orphan"></span></div>
 				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blockTransactionsHint" data-original-title="Number of transactions in the block, including coinbase transaction (which transfers block reward to the miner)."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blockTransactions"> Transactions: </span><span id="block.transactions"></span></a></div>
-				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blocTotalCoinsHint" data-original-title="Cumulative amount of coins issued by all the blocks in blockchain, from genesis up to this block."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blocTotalCoins"> Total coins in the network: </span><span id="block.totalCoins"></span></div>
-				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blockTotalTxCountHint" data-original-title="Cumulative number of transactions in the blockchain, from genesis block up to this block."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blockTotalTxCount"> Total transactions in the network: </span><span id="block.totalTransactions"></span></div>
+				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blocTotalCoinsHint" data-original-title="Cumulative amount of XFG issued by all the blocks in blockchain, from genesis up to this block."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blocTotalCoins"> Total coins in the network: </span><span id="block.totalCoins"></span></div>
+				<div class="mg-t-10"><span data-toggle="tooltip" data-placement="right" tdata-original-title="blockTotalTxCountHint" data-original-title="Cumulative number of transactions in the blockchain, from genesis up to this block."><i class="fa fa-question-circle"></i></span><span class="card-label" tkey="blockTotalTxCount"> Total transactions in the network: </span><span id="block.totalTransactions"></span></div>
 			</div>
 
 			<div class="col-md-6 stats">
@@ -107,9 +107,9 @@
 		updateText('block.currentTxsMedian', localizeNumber(block.sizeMedian));
 		updateText('block.effectiveTxsMedian', localizeNumber(block.effectiveSizeMedian));
 		updateText('block.rewardPenalty', block.penalty*100 + "%");
-		updateText('block.baseReward', getReadableCoins(block.baseReward, 3));
-		updateText('block.transactionsFee', getReadableCoins(block.totalFeeAmount, 7));
-		updateText('block.reward', getReadableCoins(block.reward, 3));
+		updateText('block.baseReward', getReadableCoins(block.baseReward, 7));
+		updateText('block.transactionsFee', getReadableCoins(block.totalFeeAmount, 4));
+		updateText('block.reward', getReadableCoins(block.reward, 7));
 		updateText('block.totalCoins', getReadableCoins2(block.alreadyGeneratedCoins, 0));
 		updateText('block.totalTransactions', localizeNumber(block.alreadyGeneratedTransactions));
 		renderTransactions(block.transactions);
@@ -144,8 +144,8 @@
 	
     function getTransactionCells(transaction){
         return '<td>' + formatPaymentLink(transaction.hash) + '</td>' +
-               '<td>' + getReadableCoins(transaction.fee, 6, true) + '</td>' +
-               '<td>' + getReadableCoins(transaction.amount_out, 4, true) + '</td>' +
+               '<td>' + getReadableCoins(transaction.fee, 4, true) + '</td>' +
+               '<td>' + getReadableCoins(transaction.amount_out, 7, true) + '</td>' +
                '<td>' + localizeNumber(transaction.size) + '</td>';
     }
 
