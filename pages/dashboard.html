@@ -96,8 +96,8 @@
     </div><!-- col-3 -->
     <div class="col-lg-3">
       <div class="dash-content dash-small-info">
-        <label class="tx-primary" tkey="totalBurned">Total Burned TEST </label>
-        <h2><span id="totalBurnedAlt">N/A</span></h2>
+        <label class="tx-primary" tkey="totalBurned">Total INCLUDING Burned TEST</label>
+        <h2><span id="totalEmissions">N/A</span></h2>
       </div><!-- dash-content -->
     </div><!-- col-3 -->
   </div><!-- row -->
@@ -425,6 +425,9 @@ function renderLastBlock() {
             var block = data.result.block;
 
             // Update total supply
+            var totalEmissions = block.alreadyGeneratedCoins;
+            updateText('totalEmissions', getReadableCoins2(totalEmissions, 0));
+
             var totalSupply = block.alreadyGeneratedCoins - burnedCoins;
             updateText('totalSupply', getReadableCoins2(totalSupply, 0));
 
