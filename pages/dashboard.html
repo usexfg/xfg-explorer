@@ -38,7 +38,7 @@
     <div class="dash-content dash-small-info">
         <label class="tx-primary" tkey="totalSupply">Total Supply</label>
         <br>
-        <label class="tx-secondary" tkey="totalSupplyInfo">Total supply minted to date.</label>
+        <label class="tx-secondary" tkey="totalSupplyInfo">Total supply minted (minus burns)</label>
         <h2><span id="totalSupply">N/A</span></h2>
       </div>
     </div>
@@ -385,7 +385,7 @@
   $.getJSON("http://103.101.201.136:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
 // Update burned coins
     var burnedCoins = infoData.ethereal_xfg || 0;
-    updateText('burnedCoins', getReadableCoins2(burnedCoins, 0));
+    updateText('burnedCoins', getReadableCoins2(burnedCoins, 2));
     updateText('totalBurnedAlt', getReadableCoins2(burnedCoins, 0));
     
     // Update banked coins (COLD)
@@ -423,7 +423,7 @@
             var block = data.result.block;
 
             // Update total supply
-            var totalSupply = block.alreadyGeneratedCoins;
+            var totalSupply = block.alreadyGeneratedCoins - burnedCoins;
             updateText('totalSupply', getReadableCoins2(totalSupply, 0));
 
             // Update banked coins (from block data)
