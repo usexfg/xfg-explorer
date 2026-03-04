@@ -425,7 +425,7 @@ function renderLastBlock() {
             var block = data.result.block;
 
             // Update total supply
-            var totalSupply = block.alreadyGeneratedCoins;
+            var totalSupply = block.alreadyGeneratedCoins - burnedCoins;
             updateText('totalSupply', getReadableCoins2(totalSupply, 0));
 
             // Update banked coins (from block data)
