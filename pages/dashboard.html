@@ -384,7 +384,7 @@
     }
   };
 function renderLastBlock() {
-  $.getJSON("http://103.101.201.136:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
+  $.getJSON("http://195.88.57.158:28280/getinfo", function (infoData) {  // need to change this back to 'api' 
 // Update burned coins
     var burnedCoins = infoData.ethereal_xfg || 0;
     updateText('burnedCoins', getReadableCoins2(burnedCoins, 0));
